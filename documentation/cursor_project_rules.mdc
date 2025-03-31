@@ -5,9 +5,9 @@ alwaysApply: true
 ---
 ## Project Overview
 
-*   **Type:** Configurable and Reusable Web-based User Portal
-*   **Description:** A portal designed to serve multiple Akore software applications, beginning with the Fuel Shipment Tracking System (FSTS).
-*   **Primary Goal:** To provide a unified, secure, and consistent user experience for accessing and managing accounts across different Akore software products. The portal simplifies user onboarding and offers a space for essential interactions.
+*   **Type:** Configurable and reusable web-based user portal
+*   **Description:** To build a central authentication, registration, and interaction point for various software applications by Akore. Initially developed for the Fuel Shipment Tracking System (FSTS).
+*   **Primary Goal:** To provide a unified, secure, and consistent user experience across different Akore software products, simplifying user onboarding and serving as a dedicated interface for essential interactions.
 
 ## Project Structure
 
@@ -15,70 +15,69 @@ alwaysApply: true
 
 *   **Directory Rules:**
 
-    *   `next.js@15`: Following Next.js 15 App Router conventions.
-    *   Uses `app/` directory with nested folders for different routes.
-    *   Example 1: "Next.js 15 (App Router)" → `app/[route]/page.tsx` conventions
+    *   `Next.js 14.2.23`: Uses `app/[route]/page.tsx` conventions
+    *   Example: For authentication routes, use `app/auth/[action]/page.tsx`
 
 ### Core Directories
 
 *   **Versioned Structure:**
 
-    *   `[folder]`: Tech-stack-versioned purpose
-    *   Example 1: `app/api` → "Next.js 15 API routes with Route Handlers"
-    *   Example 2: `src/views` → "Vue 3 composition API components"
+    *   `app/api`: "Next.js 14.2.23 API routes with Route Handlers"
+    *   `src/components`: Contains reusable UI components built with React and the Shadcn UI library
 
 ### Key Files
 
 *   **Stack-Versioned Patterns:**
 
-    *   `[file]`: Version-specific implementation
-    *   Example 1: `app/dashboard/layout.tsx` → "Next.js 15 root layouts"
-    *   Example 2: `pages/_app.js` → "Next.js Pages Router customization"
+    *   `app/dashboard/layout.tsx`: "Next.js 14.2.23 root layouts using App Router"
+    *   `app/auth/page.tsx`: "Authentication layout and pages for Clerk"
 
 ## Tech Stack Rules
 
 *   **Version Enforcement:**
 
-    *   `next@15`: Conventions tied to version
-    *   Example: "next@15": "App Router required, no `getInitialProps`"
+    *   `next@14.2.23`: "App Router required, no `pages` directory structure"
+    *   `@clerk/nextjs@6.10.2`: Utilizes Clerk for authentication and user management
+    *   `@clerk/themes@2.2.13`: Ensures visual consistency aligning with Clerk theme standards
 
 ## PRD Compliance
 
 *   **Non-Negotiable:**
 
-    *   "To provide a unified, secure, and consistent user experience for accessing and managing accounts across different Akore software products."
+    *   "Primary Entity registration must support multiple entity types beyond FSTS and be configurable."
 
 ## App Flow Integration
 
 *   **Stack-Aligned Flow:**
 
-    *   Example: "Next.js 15 Auth Flow → `app/auth/login/page.tsx` uses server actions"
+    *   Example: "Next.js 14.2.23 Auth Flow with Clerk integration utilizes API routes in `app/api` for secure server actions"
 
 ## Best Practices
 
-*   **Next.js with React and TypeScript**
+*   **Next.js (14.2.23)**
 
-    *   Ensure components are reusable and modular.
-    *   Implement SSR and ISR for better performance and SEO.
-    *   Leverage TypeScript for type safety, reducing runtime errors.
+    *   Utilize server components where possible for better performance.
+    *   Avoid client-side rendering when server-side can suffice for better SEO.
+    *   Use TypeScript for type safety across the application.
+
+*   **Clerk**
+
+    *   Ensure proper metadata is set up for user roles and permissions.
+    *   Implement robust email verification flows using Clerk's built-in features.
+
+*   **Supabase**
+
+    *   Store sensitive data in encrypted fields.
+    *   Use serverless functions for complex database interactions.
 
 *   **Tailwind CSS**
 
-    *   Utilize utility-first approach for consistent styling.
-    *   Ensure accessibility standards are met, such as appropriate color contrast.
-
-*   **Supabase (PostgreSQL)**
-
-    *   Use role-based access control for user data protection.
-    *   Ensure data validation to prevent SQL injection.
-
-*   **Clerk for Authentication**
-
-    *   Use metadata features for custom role management.
-    *   Ensure robust email verification and session management.
+    *   Leverage utility classes to maintain design consistency.
+    *   Ensure accessibility compliance with proper contrast and responsive layouts.
 
 ## Rules
 
 *   Derive folder/file patterns directly from `techStackDoc` versions.
-*   If Next.js 15 App Router: Enforce `app/` directory with nested route folders.
-*   Never mix version patterns (e.g., no `pages/` in App Router projects)."
+*   Next.js 14.2.23 App Router: Enforce `app/` directory with nested route folders.
+*   Never mix version patterns (no `pages/` in App Router projects).
+*   Maintain clear separation between authentication data managed by Clerk and business data managed by Supabase.
